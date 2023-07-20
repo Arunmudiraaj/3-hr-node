@@ -2,8 +2,9 @@ body {
   margin: 0;
   padding: 0;
 }
-.red {
-  background-color: red;
+h2 {
+  text-align: center;
+  font-family: sans-serif;
 }
 .top {
   padding: 5px;
@@ -34,15 +35,18 @@ p {
   margin-top: 3rem;
   font-family: sans-serif;
 }
-.pending {
+.productsList {
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
-.desc {
+.price {
   margin: 0 20px;
+  color: purple;
+  font-weight: 600;
 }
-.title {
+.name {
   font-weight: 600;
   font-size: large;
 }

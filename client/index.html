@@ -3,21 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Products</title>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
+    <h2>Add Your Products to Sell💵</h2>
     <div class="top">
-      <input id="title" placeholder="Enter Todo Name" />
-      <input id="desc" placeholder="Enter Description" />
-      <button class="addBtn" id="add">Add Todo</button>
+      <input id="name" placeholder="Enter Product Name" />
+      <input id="price" placeholder="Enter the Price" type="number" />
+      <button class="addBtn" id="add">Add Product</button>
     </div>
-    <p>Pending Todos List :</p>
-    <div class="pending" id="pending"></div>
-    <!-- kkk -->
-    <p>Completed Todos List :</p>
-    <div class="completed" id="completed"></div>
+    <p>Products List :</p>
+    <div class="productsList" id="productsList"></div>
 
     <script src="index.js"></script>
   </body>

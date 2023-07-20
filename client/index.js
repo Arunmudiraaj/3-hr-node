@@ -1,59 +1,49 @@
-const URL = "http://localhost:8080/todos";
-const pendingDiv = document.getElementById("pending");
-const completedDiv = document.getElementById("completed");
+const URL = "http://localhost:8080/products";
+const productsList = document.getElementById("productsList");
 const addBtn = document.getElementById("add");
-const title = document.getElementById("title");
-const desc = document.getElementById("desc");
+const nameNode = document.getElementById("name");
+const price = document.getElementById("price");
 
 window.addEventListener("DOMContentLoaded", load);
-addBtn.addEventListener("click", addTodo);
+addBtn.addEventListener("click", addProduct);
 function load() {
   axios(URL + "/all").then((res) => {
     console.log(res);
-    const pending = res.data.filter((item) => !item.completed);
-    const done = res.data.filter((item) => item.completed);
-    pendingDiv.innerHTML = "";
-    completedDiv.innerHTML = "";
-    for (const item of pending) {
-      pendingDiv.innerHTML += `<div class="item">
-      <span class="title">${item.title}</span>
-      <span class="desc">${item.description}</span>
-      <button onclick="todoCompleted(${item.id})">✅</button>
-      <button onclick="removeTodo(${item.id})">❌</button>
-    </div>`;
-    }
 
-    for (const item of done) {
-      completedDiv.innerHTML += `  <div class="item">
-      <span class="title">${item.title}</span>
-      <span class="desc">${item.description}</span>
-    </div>`;
+    productsList.innerHTML = "";
+    for (const item of res.data) {
+      addProductToDom(item);
     }
   });
 }
-function addTodo() {
-  const t = title.value;
-  const d = desc.value;
+function addProduct() {
+  const n = nameNode.value;
+  const p = price.value;
   const body = {
-    title: t,
-    description: d,
+    name: n,
+    price: p,
   };
   axios.post(`${URL}/add`, body).then((result) => {
     console.log(result);
-    load();
-  });
-}
-function todoCompleted(id) {
-  axios.put(URL + "/completed/" + id).then((result) => {
-    console.log(result);
-    load();
+    addProductToDom(result.data);
   });
 }
 
-function removeTodo(id) {
-  console.log(id);
+function removeProduct(id) {
+  removeFromDom(id);
   axios.delete(URL + "/delete/" + id).then((result) => {
     console.log(result);
-    load();
   });
+}
+function addProductToDom(obj) {
+  productsList.innerHTML =
+    `<div class="item" id="${obj.id}">
+<span class="name">${obj.name}</span>
+<span class="price">💲${obj.price}</span>
+<button onclick="removeProduct(${obj.id})">❌</button>
+</div>` + productsList.innerHTML;
+}
+function removeFromDom(id) {
+  const item = document.getElementById(id);
+  productsList.removeChild(item);
 }

@@ -1,19 +1,15 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../util/database");
 
-const Todo = sequelize.define("todo", {
+const Product = sequelize.define("products", {
   id: {
     type: Sequelize.INTEGER,
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
   },
-  completed: {
-    type: Sequelize.BOOLEAN,
-    allowNull: false,
-  },
-  title: Sequelize.STRING,
-  description: Sequelize.STRING,
+  name: Sequelize.STRING,
+  price: Sequelize.INTEGER,
 });
 
-module.exports = Todo;
+module.exports = Product;
